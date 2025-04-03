@@ -11,7 +11,7 @@ const InterviewCard = ({ interviewId, userId, role, type, techstack, createdAt }
     const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format("DD/MM/YYYY");
 
     return (
-        <div className="w-[360px] max-sm:w-full min-h-96 p-6 rounded-lg border border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 shadow-sm">
+        <div className="w-[500px] max-sm:w-full min-h-96 p-6 rounded-lg border border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 shadow-sm">
             <div className="relative h-full flex flex-col gap-4">
                 {/* Type Badge */}
                 <div className="absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-blue-100 dark:bg-blue-900">
