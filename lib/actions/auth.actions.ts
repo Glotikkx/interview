@@ -25,6 +25,24 @@ export async function setSessionCookie(idToken: string) {
   });
 }
 
+interface SignUpParams {
+  uid: string;
+  name: string;
+  email: string;
+}
+
+interface SignInParams {
+  email: string;
+  idToken: string;
+}
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  [key: string]: unknown; // For any additional properties from firestore
+}
+
 export async function signUp(params: SignUpParams) {
   const { uid, name, email } = params;
 
@@ -49,11 +67,11 @@ export async function signUp(params: SignUpParams) {
       success: true,
       message: "Account created successfully. Please sign in.",
     };
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error creating user:", error);
 
     // Handle Firebase specific errors
-    if (error.code === "auth/email-already-exists") {
+    if ((error as { code: string }).code === "auth/email-already-exists") {
       return {
         success: false,
         message: "This email is already in use",
@@ -79,7 +97,12 @@ export async function signIn(params: SignInParams) {
       };
 
     await setSessionCookie(idToken);
-  } catch (error: any) {
+    
+    return {
+      success: true,
+      message: "Signed in successfully"
+    };
+  } catch {
     console.log("");
 
     return {
@@ -130,4 +153,3 @@ export async function isAuthenticated() {
   const user = await getCurrentUser();
   return !!user;
 }
-
