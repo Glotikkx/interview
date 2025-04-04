@@ -17,7 +17,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
           <h2 className="text-primary-100">PrepWise</h2>
         </Link>
       </nav>
-
+    
       {children}
     </div>
   );
