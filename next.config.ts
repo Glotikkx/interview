@@ -12,9 +12,9 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 
 module.exports = {
-  webpack: (config) => {
+  webpack: (config: { resolve: { fallback: unknown; }; }) => {
     config.resolve.fallback = {
-      ...config.resolve.fallback,
+      ...(typeof config.resolve.fallback === 'object' && config.resolve.fallback !== null ? config.resolve.fallback : {}),
       fs: false,
     };
     return config;
