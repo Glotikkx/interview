@@ -3,7 +3,7 @@ import DisplayTechIcons from "@/components/DisplayTechIcons";
 import { getCurrentUser } from "@/lib/actions/auth.actions";
 import { getInterviewById } from "@/lib/actions/general.action";
 import { getRandomInterviewCover } from "@/lib/utils";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 
 const page = async ({params}: RouteParams) => {
