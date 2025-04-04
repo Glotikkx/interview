@@ -35,6 +35,7 @@ const Agent = ({
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [lastMessage, setLastMessage] = useState<string>("");
 
+
   useEffect(() => {
     const onCallStart = () => {
       setCallStatus(CallStatus.ACTIVE);
@@ -55,6 +56,7 @@ const Agent = ({
       console.log("speech start");
       setIsSpeaking(true);
     };
+    
 
     const onSpeechEnd = () => {
       console.log("speech end");
@@ -64,6 +66,17 @@ const Agent = ({
     const onError = (error: Error) => {
       console.log("Error:", error);
     };
+    // Add this to your existing event listeners
+    const onCallError = (error: Error) => {
+      console.error("Call error:", error);
+  // Handle gracefully instead of just logging
+      setCallStatus(CallStatus.FINISHED);
+  // Maybe set an error state to show to the user
+};
+
+    vapi.on("error", onCallError);
+// Don't forget to remove in cleanup
+    vapi.off("error", onCallError);
 
     vapi.on("call-start", onCallStart);
     vapi.on("call-end", onCallEnd);
