@@ -8,9 +8,11 @@ import React from 'react'
 
 const Page = async () => {
   const user = await getCurrentUser();
+  const userId = user?.id || ''; // Use empty string or appropriate default value
+  
   const [userInterviews, latestInterviews] = await Promise.all([
-    getInterviewsByUserId(user?.id!),
-    getLatestInterviews({ userId: user?.id! }),
+    getInterviewsByUserId(userId),
+    getLatestInterviews({ userId }),
   ]);
   
   const hasPastInterviews = userInterviews?.length > 0;
